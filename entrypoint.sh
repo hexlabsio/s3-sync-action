@@ -39,7 +39,70 @@ EOF
 
 # Sync using our dedicated profile and suppress verbose messages.
 # All other flags are optional via the `args:` directive.
+# Exclude any compressed br or gzip files
 sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
+              --exclude '*.br' \
+              --exclude '*.gz' \
+              --profile s3-sync-action \
+              --no-progress \
+              ${ENDPOINT_APPEND} $*"
+
+# Only include html gzip files and set correct content type and encoding
+sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
+              --exclude '*' \
+              --include '*.html.gz' \
+              --content-type text/html \
+              --content-encoding gzip \
+              --profile s3-sync-action \
+              --no-progress \
+              ${ENDPOINT_APPEND} $*"
+
+# Only include html br files and set correct content type and encoding
+sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
+              --exclude '*' \
+              --include '*.html.br' \
+              --content-type text/html \
+              --content-encoding br \
+              --profile s3-sync-action \
+              --no-progress \
+              ${ENDPOINT_APPEND} $*"
+
+# Only include js gzip files and set correct content type and encoding
+sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
+              --exclude '*' \
+              --include '*.js.gz' \
+              --content-type application/javascript \
+              --content-encoding gzip \
+              --profile s3-sync-action \
+              --no-progress \
+              ${ENDPOINT_APPEND} $*"
+
+# Only include js br files and set correct content type and encoding
+sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
+              --exclude '*' \
+              --include '*.js.br' \
+              --content-type application/javascript \
+              --content-encoding br \
+              --profile s3-sync-action \
+              --no-progress \
+              ${ENDPOINT_APPEND} $*"
+
+# Only include css gzip files and set correct content type and encoding
+sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
+              --exclude '*' \
+              --include '*.css.gz' \
+              --content-type text/css \
+              --content-encoding gzip \
+              --profile s3-sync-action \
+              --no-progress \
+              ${ENDPOINT_APPEND} $*"
+
+# Only include css br files and set correct content type and encoding
+sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
+              --exclude '*' \
+              --include '*.css.br' \
+              --content-type text/css \
+              --content-encoding br \
               --profile s3-sync-action \
               --no-progress \
               ${ENDPOINT_APPEND} $*"
