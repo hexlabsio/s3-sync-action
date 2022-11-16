@@ -51,7 +51,7 @@ sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
 for var in "$@"
 do
   if [ $var != "--delete" ]; then
-    REDUCED_ARGS+="$var"
+    REDUCED_ARGS+=("$var")
   fi
 done
 
@@ -63,7 +63,7 @@ sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
               --content-encoding gzip \
               --profile s3-sync-action \
               --no-progress \
-              ${ENDPOINT_APPEND} ${REDUCED_ARGS[*]}"
+              ${ENDPOINT_APPEND} ${REDUCED_ARGS[@]}"
 
 # Only include html br files and set correct content type and encoding
 sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
@@ -73,7 +73,7 @@ sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
               --content-encoding br \
               --profile s3-sync-action \
               --no-progress \
-              ${ENDPOINT_APPEND} ${REDUCED_ARGS[*]}"
+              ${ENDPOINT_APPEND} ${REDUCED_ARGS[@]}"
 
 # Only include js gzip files and set correct content type and encoding
 sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
@@ -83,7 +83,7 @@ sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
               --content-encoding gzip \
               --profile s3-sync-action \
               --no-progress \
-              ${ENDPOINT_APPEND} ${REDUCED_ARGS[*]}"
+              ${ENDPOINT_APPEND} ${REDUCED_ARGS[@]}"
 
 # Only include js br files and set correct content type and encoding
 sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
@@ -93,7 +93,7 @@ sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
               --content-encoding br \
               --profile s3-sync-action \
               --no-progress \
-              ${ENDPOINT_APPEND} ${REDUCED_ARGS[*]}"
+              ${ENDPOINT_APPEND} ${REDUCED_ARGS[@]}"
 
 # Only include css gzip files and set correct content type and encoding
 sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
@@ -103,7 +103,7 @@ sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
               --content-encoding gzip \
               --profile s3-sync-action \
               --no-progress \
-              ${ENDPOINT_APPEND} ${REDUCED_ARGS[*]}"
+              ${ENDPOINT_APPEND} ${REDUCED_ARGS[@]}"
 
 # Only include css br files and set correct content type and encoding
 sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
@@ -113,7 +113,7 @@ sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
               --content-encoding br \
               --profile s3-sync-action \
               --no-progress \
-              ${ENDPOINT_APPEND} ${REDUCED_ARGS[*]}"
+              ${ENDPOINT_APPEND} ${REDUCED_ARGS[@]}"
 
 # Clear out credentials after we're done.
 # We need to re-run `aws configure` with bogus input instead of
