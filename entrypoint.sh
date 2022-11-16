@@ -51,7 +51,7 @@ sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
 for var in "$@"
 do
   if [ $var != "--delete" ]; then
-    REDUCED_ARGS+=($var)
+    REDUCED_ARGS+=$var
   fi
 done
 
