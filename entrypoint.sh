@@ -55,6 +55,8 @@ do
   fi
 done
 
+echo "${REDUCED_ARGS[@]}"
+
 # Only include html gzip files and set correct content type and encoding
 sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
               --exclude '*' \
