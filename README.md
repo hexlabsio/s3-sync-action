@@ -2,6 +2,8 @@
 
 This action was forked from 'https://github.com/jakejarvis/s3-sync-action'. At the point of forking a regular s3 sync would identify the content type of br and gzip files as application/octet-stream. To correctly serve compressed files we need the files to maintain their orginal content types.  Due to this we would need to use multiple calls to this github action with various includes and excludes to apply the correct the correct content types for br and gzip files. This action is calls the orginal actions supplying the different includes and excludes.
 
+Calls s3 sync multiple times. The initial call ignores all files ending with br and gz. Additional calls are then made to upload the br and gz files while supplying the correct content type and content encoding. The content types currently supported are js, css, and html.
+
 # GitHub Action to Sync S3 Bucket 🔄
 
 This simple action uses the [vanilla AWS CLI](https://docs.aws.amazon.com/cli/index.html) to sync a directory (either from your repository or generated during your workflow) with a remote S3 bucket.
