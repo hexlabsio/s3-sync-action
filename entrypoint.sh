@@ -49,14 +49,16 @@ sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
               ${ENDPOINT_APPEND} $*"
 
 i=0
-ORIGINAL_ARGS=($*)
-while [ $i -lt ${#ORIGINAL_ARGS[*]} ]; do
+ORIGINAL_ARGS=($@)
+while [ $i -lt ${#ORIGINAL_ARGS[@]} ]; do
   arg=${ORIGINAL_ARGS[$i]}
   if [ $arg != "--delete" ]; then
     REDUCED_ARGS+=($arg)
   fi
   i=$((i + 1))
 done
+
+echo "${REDUCED_ARGS[@]}"
 
 # Only include html gzip files and set correct content type and encoding
 sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
