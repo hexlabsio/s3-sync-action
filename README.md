@@ -1,6 +1,6 @@
 # Additons
 
-This action was forked from 'https://github.com/jakejarvis/s3-sync-action'. At the point of forking a regular s3 sync would identify the content type of br and gzip files as application/octet-stream. To correct serve the compressed files we need the files to maintain there orginal content types.  Due to this we would need to use multiple calls to this github action with various includes and excludes to apply the correct the correct content types for br and gzip files. This action is calls the orginal actions supplying the different includes and excludes.
+This action was forked from 'https://github.com/jakejarvis/s3-sync-action'. At the point of forking a regular s3 sync would identify the content type of br and gzip files as application/octet-stream. To correctly serve compressed files we need the files to maintain their orginal content types.  Due to this we would need to use multiple calls to this github action with various includes and excludes to apply the correct the correct content types for br and gzip files. This action is calls the orginal actions supplying the different includes and excludes.
 
 # GitHub Action to Sync S3 Bucket 🔄
 
